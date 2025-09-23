@@ -129,6 +129,34 @@ date: git Last Modified
 									{%- endif -%}
 								</tbody>
 							</table>
+							{%- if team.alternativeHomeVenue != '' -%}
+								<table>
+									<tbody>
+										<tr>
+											<th>Game Day</th>
+											<td>{{ team.alternativeGameDay }}</td>
+										</tr>
+										<tr>
+											<th>Tipoff</th>
+											<td>{{ team.alternativeTipoff }}</td>
+										</tr>
+										<tr>
+											<th>Venue</th>
+											<td>{{ team.alternativeHomeVenue | replace: ",", "<br>" }}</td>
+										</tr>
+										<tr>
+											<th>Free Parking</th>
+											<td>{{ team.alternativeFreeParking }}</td>
+										</tr>
+										{%- if team.freeParking == 'No'-%}
+											<tr>
+												<th>Parking Notes</th>
+												<td>{{ team.alternativeParkingNotes }}</td>
+											</tr>
+										{%- endif -%}
+									</tbody>
+								</table>
+							{%- endif %}
 						</td>
 					</tr>
 				{%- endfor %}
