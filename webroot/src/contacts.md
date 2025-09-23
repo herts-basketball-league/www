@@ -53,7 +53,7 @@ date: git Last Modified
 										<th>Email</th>
 										<td>
 											{%- if team.primaryContactShare == 'Yes' -%}
-												{{ team.primaryContactEmail }}
+												<a href="mailto:{{ team.primaryContactEmail }}">{{ team.primaryContactEmail }}</a>
 											{%- else -%}
 												Redacted
 											{%- endif -%}
@@ -63,7 +63,7 @@ date: git Last Modified
 										<th>Phone</th>
 										<td>
 											{%- if team.primaryContactShare == 'Yes' -%}
-												{{ team.primaryContactPhone }}
+												<a href="tel:{{ team.primaryContactPhone }}">{{ team.primaryContactPhone }}</a>
 											{%- else -%}
 												Redacted
 											{%- endif -%}
@@ -82,7 +82,7 @@ date: git Last Modified
 										<th>Email</th>
 										<td>
 											{%- if team.alternativeContactShare == 'Yes' -%}
-												{{ team.alternativeContactEmail }}
+												<a href="mailto:{{ team.alternativeContactEmail }}">{{ team.alternativeContactEmail }}</a>
 											{%- else -%}
 												Redacted
 											{%- endif -%}
@@ -92,7 +92,7 @@ date: git Last Modified
 										<th>Phone</th>
 										<td>
 											{%- if team.alternativeContactShare == 'Yes' -%}
-												{{ team.alternativeContactPhone }}
+												<a href="tel:{{ team.alternativeContactPhone }}">{{ team.alternativeContactPhone }}</a>
 											{%- else -%}
 												Redacted
 											{%- endif -%}
