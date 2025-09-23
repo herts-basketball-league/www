@@ -1,4 +1,4 @@
 ---
 layout: default.html
-date: Last Modified
+date: git Last Modified
 ---

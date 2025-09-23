@@ -1,7 +1,7 @@
 ---
 title: Contacts
 layout: default.html
-date: Last Modified
+date: git Last Modified
 ---
 
 {%- assign contacts = contacts | sort: 'teamName' | sort: 'division' | group_by_exp: 'item', 'item.division' -%}
