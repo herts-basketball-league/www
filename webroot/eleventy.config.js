@@ -1,6 +1,7 @@
 export default async function( eleventyConfig ) {
 	eleventyConfig.addPassthroughCopy( './src/assets/**' );
 	eleventyConfig.addPassthroughCopy( './src/.htaccess' );
+	eleventyConfig.addPassthroughCopy( './src/documents/**' );
 };
 
 import 'dotenv/config';
