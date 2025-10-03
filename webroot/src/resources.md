@@ -8,7 +8,9 @@ date: git Last Modified
 
 * Digital Score Sheet
 	* [Digital Score Sheet in action](https://youtu.be/klEp1jWumbs)
-	* [Screen recording of Digital Score Sheet (no sound)](https://drive.google.com/file/d/1dkXeoSwVJensd4KV6ZCLwR3otRfGns4u/view)
+	* [Screen recording of the Digital Score Sheet (no sound)](https://drive.google.com/file/d/1dkXeoSwVJensd4KV6ZCLwR3otRfGns4u/view)
+	* [Narrated recording of the Digital Score Sheet](https://drive.google.com/file/d/1upJKfc5uxFTZNx3QBN-myCZ3vuUiG5w3/view?usp=sharing)
+	* [Using multiple devices with the Digital Score Sheet](/documents/teamsportz/Digital-Scoresheet-Multiple-Devices.mov)
 * Documents
 	* 2025/26 AGM
 		* [AGM Agenda](/documents/2025_26_AGM/HBL%20AGM%202025.pdf)
