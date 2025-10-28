@@ -12,13 +12,15 @@ date: git Last Modified
 	* [Narrated recording of the Digital Score Sheet](https://drive.google.com/file/d/1upJKfc5uxFTZNx3QBN-myCZ3vuUiG5w3/view?usp=sharing)
 	* [Using multiple devices with the Digital Score Sheet](/documents/teamsportz/Digital-Scoresheet-Multiple-Devices.mov)
 * Documents
+	* 2025/26
+		* [HBL Constitution](/documents/2025-26/HBL_Constitution_2025-6.pdf)
+		* [HBL Rules](/documents/2025-26/HBL_Rules_2025-6.pdf)
+		* [Officials’ Code of Conduct](/documents/2025-26/Officials_Code_of_Conduct_2025-6.pdf)
+		* [Disciplinary Rules](/documents/2025-26/HBL_Disciplinary_Rules_2025-6.pdf)
 	* 2025/26 AGM
 		* [AGM Agenda](/documents/2025_26_AGM/HBL%20AGM%202025.pdf)
 		* [AGM Minutes 2024/25](/documents/2025_26_AGM/HBL%20AGM%20minutes%209.7.24.pdf)
 		* [Accounts 2024/25](/documents/2025_26_AGM/HBL%20Accounts%202425%20IC.pdf)
-		* [HBL Rules 2025/26](/documents/2025_26_AGM/HBL%20Rules%20Season%202025_6%20v3%20(2).pdf)
-		* [Disciplinary Rules 2025/26](/documents/2025_26_AGM/HBL%20Disciplinary%20Rules%202025_6.pdf)
-		* [Officials’ Code of Conduct](/documents/2025_26_AGM/Officials'%20Code%20of%20Conduct%202025_6.pdf)
 		* [Rules and Constitution Report](/documents/2025_26_AGM/HBL%20Rules%20and%20Constitutioin%20Report.pdf)
 		* [Welfare Officer Report](/documents/2025_26_AGM/HBL%20AGM%20Report.pdf)
 		* [Under 18s Consent Form](/documents/2025_26_AGM/HBL%20Under%2018s%20Consent%20Form.pdf)

@@ -32,11 +32,14 @@ date: git Last Modified
 							<table>
 								<tbody>
 									<tr>
-										<th>Home Kit</th>
+										<th colspan="2">Kit Colours</th>
+									</tr>
+									<tr>
+										<th>Preferred</th>
 										<td>{{ team.homeColour }}</td>
 									</tr>
 									<tr>
-										<th>Away Kit</th>
+										<th>Alternative</th>
 										<td>{{ team.awayColour }}</td>
 									</tr>
 								</tbody>

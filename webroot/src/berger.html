@@ -1,0 +1,214 @@
+---
+title: Berger Tables
+layout: default.html
+date: git Last Modified
+---
+
+<script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Basic&display=swap');
+	*,*::before,*::after{box-sizing:border-box}body,h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}ul[role="list"],ol[role="list"]{list-style:none}html:focus-within{scroll-behavior:smooth}body{min-height:100vh;text-rendering:optimizeSpeed}a:not([class]){text-decoration-skip-ink:auto}img,picture{max-width:100%;display:block}input,button,textarea,select{font:inherit}@media(prefers-reduced-motion:reduce){html:focus-within{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+	body {
+		padding: 1em;
+		font-family: 'Basic', sans-serif;
+	}
+	.reportscontainer {
+		display: flex;
+		align-items: flex-start;
+	}
+	/* .sheetcontainer {
+		vertical-align: top;
+	} */
+	</style>
+<div class="container">
+	<h1>League Round-Robin Fixtures Generator</h1>
+<form>
+	<label for="competitors">Competitors</label>
+	<input id="competitors" name="competitors" type="number" value="6">
+	<label for="double">Double round-robin?</label>
+	<input id="double" name="double" type="checkbox">
+</form>
+	<ul>
+		<li>In the grid, each row is a phase of the round-robin. The row count is equal to the number of competitors minus one, or twice that number for a double round-robin.</li>
+		<li>In the grid, each pair of cells in a row shows a single match, the Home competitor followed by the Away competitor e.g. A1 & B1 are the competitors in a match.</li>
+		<li>In Matches, each row is a match.</li>
+		<li>In Home or Away, each row is a competitor and the columns show match phases.</li>
+		<li>In a double round-robin all matches are repeated with Home and Away reversed.</li>
+		<li>Each competitor has a partner who will always be Home if the other is Away and vice versa. Use this if venue shares are an issue.</li>
+		<li>Partners are pairs of numbers from each half of the competitor list e.g. for a 10 competitor round robin, the partners are 1 &amp; 6, 2 &amp; 7, 3 &amp; 8, 4 &amp; 9, 5 &amp; 10.</li>
+		<li>The tables will always show an even number of competitors. To facilitate byes, just pick any number as the designated bye.</li>
+		<li>If there are more than 4 competitors, no competitor should ever have more than two Home or two Away matches in a row. Beware other online tools that claim this, but fail when it's a double round-robin or ignore this consideration entirely.</li>
+		<li>Low numbered competitors are home in the first phase. It may be useful to give new competitors high numbers.</li>
+		<li>This tool was constructed for use by the <a href="https://quizcentral.net/">Online Quiz League</a> but could be useful more widely.</li>
+		<li>Contact Will Jones <script>document.write('<'+'a'+' '+'h'+'r'+'e'+'f'+'='+"'"+'m'+'a'+'i'+'l'+'t'+'o'+'&'+'#'+'5'+'8'+';'+'%'+'7'+'7'+'i'+'%'+'&'+'#'+'5'+'4'+';'+'C'+'l'+'j'+'o'+'n'+'e'+'%'+'7'+'&'+'#'+'5'+'1'+';'+'%'+'7'+'5'+'k'+'&'+'#'+'6'+'4'+';'+'g'+'m'+'%'+'&'+'#'+'5'+'4'+';'+'&'+'#'+'4'+'9'+';'+'i'+'&'+'#'+'3'+'7'+';'+'&'+'#'+'5'+'4'+';'+'C'+'&'+'#'+'4'+'6'+';'+'c'+'%'+'6'+'F'+'m'+"'"+'>'+'w'+'i'+'l'+'l'+'&'+'#'+'1'+'0'+'6'+';'+'&'+'#'+'1'+'1'+'1'+';'+'n'+'e'+'s'+'u'+'&'+'#'+'1'+'0'+'7'+';'+'&'+'#'+'6'+'4'+';'+'&'+'#'+'1'+'0'+'3'+';'+'m'+'&'+'#'+'9'+'7'+';'+'&'+'#'+'1'+'0'+'5'+';'+'&'+'#'+'1'+'0'+'8'+';'+'&'+'#'+'4'+'6'+';'+'c'+'o'+'m'+'<'+'/'+'a'+'>');</script><noscript>[Turn on JavaScript to see the email address]</noscript> if you encounter any issues.</li>
+	</ul>
+	<div class="reportscontainer">
+		<div class="report">
+			<h2>Grid</h2>
+			<div id="basis" class="sheet"></div>
+		</div>
+		<div class="report">
+			<h2>Matches</h2>
+			<div id="ompr" class="sheet"></div>
+		</div>
+		<div class="report">
+			<h2>Home or Away</h2>
+			<div id="hora" class="sheet"></div>
+		</div>
+	</div>
+</div>
+
+<script>
+// https://codepen.io/WillJonesUK/pen/yLqgWLY
+	"use strict";
+	var competitors;
+	var rounds;
+	var omprcolumns;
+	var horacolumns;
+
+	function createBasisTable( int, double ) { // Even number, True or False
+		let arr = [];
+		int = parseInt( int, 10 );
+		competitors = ( int % 2 == 0 ) ? int : int + 1;
+		rounds = competitors - 1;
+		let locations = competitors / 2;
+
+
+// console.log( int,competitors,rounds,locations );
+
+// console.log( [3 % 2] );
+
+		for ( let r = 0; r < rounds; r++ ) {
+			arr.push( [r % 2 == 0 ? ( r / 2 ) + 1 : competitors, r % 2 == 0 ? competitors : ( r + competitors + 1 ) / 2] );
+			for ( let l = 1; l < locations; l++ ) {
+				arr[r].push( ( r % 2 == 0 ? ( r / 2 ) + 1 + l : ( ( ( ( r + competitors + 1 ) / 2 ) + l - 1 ) % ( competitors - 1 ) ) + 1 ) );
+				arr[r].push( ( ( ( ( rounds * ( locations - 1 ) ) - ( l - 1 ) - ( r * ( locations - 1 ) ) ) - 1 ) % ( competitors - 1 ) ) + 1 );
+			}
+
+console.log( r % 2 == 0 ? ( r / 2 ) + 1 : competitors, r % 2 == 0 ? competitors : ( r + competitors + 1 ) / 2 );
+
+// console.log( [r,r % 2,r % 2 == 0,r % 2 == 0 ? ( r / 2 ) + 1 : competitors] );
+
+
+		}
+
+
+// console.log( arr );
+
+		if ( competitors >= 6 ) {
+			let penu = arr[rounds - 2];
+			let last = arr[rounds - 1];
+			arr[rounds - 2] = last;
+			arr[rounds - 1] = penu;
+		}
+
+		if ( double ) { // Add additional rounds with everything flipped
+			for ( let r = 0; r < rounds; r++ ) {
+				arr.push( [] );
+				for ( let l = 0; l < locations; l++ ) {
+					arr[rounds + r].push( arr[r][( l * 2 ) + 1] );
+					arr[rounds + r].push( arr[r][l * 2] );
+				}
+			}
+
+			rounds = rounds * 2;
+		}
+
+		let horareport = JSON.parse( JSON.stringify( arr ) );
+		let hora = '';
+		let competitor;
+
+		for ( let r = 0; r < rounds; r++ ) {
+			for ( let c = 0; c < competitors; c++ ) {
+				competitor = arr[r][c] - 1;
+				hora = ( c % 2 == 0 ) ? 'A' : 'H';
+				horareport[r][competitor] = hora;
+			}
+		}
+
+		return arr;
+	}
+
+	var basisdata;
+	var omprdata;
+	var horadata;
+
+	function basisToOMPR( data ) {
+		omprcolumns = [
+			{ name: 'phase', type: 'number', title: 'Phase' },
+			{ name: 'home', type: 'number', title: 'Home' },
+			{ name: 'away', type: 'number', title: 'Away' },
+		];
+		omprdata = [];
+		for ( let r = 0; r < data.length; r++ ) {
+			for ( let c = 0; c < data[r].length; c++ ) {
+				if ( c % 2 == 1 ) { continue; }
+				omprdata.push( [r + 1, data[r][c], data[r][c + 1]] );
+			}
+		}
+		return omprdata;
+	}
+
+	function OMPRtoHorA( data ) {
+		horadata = [];
+		horacolumns = [];
+		for ( let r = 0; r < rounds; r++ ) {
+			horacolumns.push( { name: 'r' + ( r + 1 ), type: 'text', title: ( r + 1 ) } );
+		}
+		for ( let c = 0; c < competitors; c++ ) {
+			horadata.push( [] );
+		}
+		for ( let r = 0; r < data.length; r++ ) {
+			horadata[data[r][1] - 1][data[r][0] - 1] = 'H';
+			horadata[data[r][2] - 1][data[r][0] - 1] = 'A';
+		}
+		return horadata;
+	}
+	var competitorsInputValue;
+	var doubleInputChecked;
+	const basisDiv = document.getElementById( "basis" );
+	const omprDiv = document.getElementById( "ompr" );
+	const horaDiv = document.getElementById( "hora" );
+	const competitorsInput = document.getElementById( "competitors" );
+	const doubleInput = document.getElementById( "double" );
+
+	function getVariables() {
+		while ( basisDiv.firstChild && basisDiv.removeChild( basisDiv.firstChild ) );
+		while ( omprDiv.firstChild && omprDiv.removeChild( omprDiv.firstChild ) );
+		while ( horaDiv.firstChild && horaDiv.removeChild( horaDiv.firstChild ) );
+		competitorsInputValue = competitorsInput.value;
+		doubleInputChecked = doubleInput.checked;
+
+		basisdata = createBasisTable( competitorsInputValue, doubleInputChecked );
+		omprdata = basisToOMPR( basisdata );
+		horadata = OMPRtoHorA( omprdata );
+
+
+// console.log( basisdata );
+// console.log( omprdata );
+// console.log( horadata );
+
+
+		var basis = jspreadsheet( basisDiv, {
+			data: basisdata
+		} );
+		var ompr = jspreadsheet( omprDiv, {
+			columns: omprcolumns,
+			data: omprdata
+		} );
+		var hora = jspreadsheet( horaDiv, {
+			columns: horacolumns,
+			data: horadata
+		} );
+	}
+	getVariables();
+	competitorsInput.addEventListener( "input", () => {
+		getVariables();
+	} );
+	doubleInput.addEventListener( "change", () => {
+		getVariables();
+	} );
+</script>
