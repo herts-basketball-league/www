@@ -7,6 +7,7 @@ date: git Last Modified
 # Resources
 
 * Digital Score Sheet
+	* When using the HBL issued Android tablet, ensure you have [updated the Chrome browser to the latest version](https://support.google.com/chrome/answer/95414?co=GENIE.Platform%3DAndroid)
 	* [Digital Score Sheet in action](https://youtu.be/klEp1jWumbs)
 	* [Screen recording of the Digital Score Sheet (no sound)](https://drive.google.com/file/d/1dkXeoSwVJensd4KV6ZCLwR3otRfGns4u/view)
 	* [Narrated recording of the Digital Score Sheet](https://drive.google.com/file/d/1upJKfc5uxFTZNx3QBN-myCZ3vuUiG5w3/view?usp=sharing)
